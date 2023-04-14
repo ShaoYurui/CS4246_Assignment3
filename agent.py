@@ -176,7 +176,7 @@ def compute_loss(model, target, states, actions, rewards, next_states, dones):
     next_q_values = target(next_states).max(1, keepdim=True)[0].detach()
     expected_q_values = rewards + gamma * next_q_values * (1 - dones)
     loss = F.smooth_l1_loss(curr_q_values, expected_q_values)
-    return 1
+    return loss
 
 
 def optimize(model, target, memory, optimizer):
